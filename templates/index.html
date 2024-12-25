@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Segmentation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Set dynamic background image */
+        body {
+            background-image: url("{{ url_for('static', filename='customer-segmentation.png') }}");
+            background-size: cover; /* Adjust to cover the entire viewport */
+            background-repeat: no-repeat; /* Prevent tiling */
+            background-attachment: fixed; /* Keep the background fixed during scrolling */
+            background-position: center; /* Center the image */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Customer Segmentation</h1>
+            <form action="/predict" method="POST">
+                
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="18" max="100" required>
+
+                <label for="income">Annual Income (k$):</label>
+                <input type="number" id="income" name="income" required>
+
+                <label for="spendingScore">Spending Score (1-100):</label>
+                <input type="number" id="spendingScore" name="spendingScore" min="1" max="100" required>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+
+            <!-- Display the result in a text area if available -->
+            {% if description %}
+            <textarea rows="10" cols="50" readonly>{{ description }}</textarea>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
